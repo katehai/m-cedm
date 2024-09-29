@@ -1,0 +1,30 @@
+_target_: models.oformer.PlOformer
+hparams:
+  name: oformer_t
+  time_history: 128
+  encoder:
+    input_channels: 3  # how many channels
+    time_window: 1
+    in_emb_dim: 128  # embedding dim of token
+    out_channels: 128
+    max_node_type: 2
+    heads: 1
+    depth: 4  # depth of transformer / how many layers of attention
+    res: 128
+    use_ln: True
+    emb_dropout: 0.0  # dropout of embedding
+    relative_emb_dim: 2
+  decoder:
+    max_node_type: 2
+    latent_channels: 128
+    out_channels: 1  # one variable is provided
+    res: 128
+    scale: 2
+    dropout: 0.1
+    relative_emb_dim: 2
+  norm_shape: []
+  loss: mse
+  lr: 0.001
+  weight_decay: 1e-4
+  curriculum_steps: 8
+  curriculum_ratio: 0.2

@@ -1,0 +1,3 @@
+save_samples:
+  _target_: callbacks.custom_callbacks.SaveFullGeneratedSamples
+  dirpath: "samples/"

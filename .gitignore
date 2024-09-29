@@ -1,0 +1,6 @@
+.idea
+data
+logs
+plots
+generate/outputs
+checkpoints

@@ -1,0 +1,5 @@
+save_samples:
+  _target_: callbacks.custom_callbacks.SaveFullGeneratedSamples
+  dirpath: "pred/"
+  traj_name: "pred"
+  gt_name: "target"

@@ -1,0 +1,22 @@
+_target_: models.fno_state_2d.PlFnoStateReconstr2d
+hparams:
+  name: fno_state_reconstr_2d
+  # Model hyperparameters
+  modes_1: 12
+  modes_2: 12
+  width: 32
+  num_layers: 5
+  padding_t: 4
+  padding_x: 0
+  inst_norm: False
+  time_history: 128
+  time_future: 0
+  input_size: 1
+  state_size: 1
+  norm_shape: []
+  # Optimization hyperparameters
+  factor: 0.3
+  step_size: 50
+  loss: l1
+  lr: 0.001
+  weight_decay: 0

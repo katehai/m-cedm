@@ -1,0 +1,15 @@
+name: ddim_part_u
+type: ddim
+timesteps: 50
+skip_type: uniform
+eta: 0.0
+n_samples: 5
+n_repeat: 10
+n_time_h: 128
+n_time_u: 50  # 10
+return_last: True
+select_by_pde: False
+use_gt_pde_select: True
+guide_dx: False
+w: 0.0
+plot_scaled: False

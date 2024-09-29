@@ -1,0 +1,33 @@
+defaults:
+  - model: adm_cond_h_res32
+  - datamodule: datamodule_ddim
+  - trainer: trainer_ddim
+  - callbacks: callbacks_ddim
+  - diff_sampler: edm_sampler  # used only for testing
+  - override hydra/sweeper: optuna
+  - override hydra/sweeper/sampler: tpe
+  - override hydra/hydra_logging: colorlog
+  - override hydra/job_logging: colorlog
+  - _self_
+seed: 1
+name: ddim_cond_h
+system: swe
+logs_root_folder: ""
+dataroot: data
+override_epochs: True
+subname: ""
+ckpt_path: null
+hydra:
+  sweep:
+    dir: ${logs_root_folder}logs/sweepruns/${name}${subname}${now:%Y-%m-%d-%H-%M-%S}
+    subdir: ${hydra.job.num}
+  sweeper:
+    sampler:
+      seed: 0
+    direction: minimize
+    study_name: ddim_cond_h
+    storage: null
+    n_trials: 15
+    n_jobs: 2
+  run:
+    dir: ${logs_root_folder}logs/runs/${name}${subname}${now:%Y-%m-%d-%H-%M-%S}

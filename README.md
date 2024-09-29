@@ -11,6 +11,56 @@ During the training we sample which states are observed and which are unobserved
 The model is trained to recover the unobserved states conditioned on the observed ones and tested on the tasks presented below.
 <img src="img/mcedm.jpg" alt="img/swe_per1.png" width="700"/>
 
+
+## Run
+In order to run the training and evaluation of the proposed method, the following command can be used:
+
+```bash
+python run.py --config-name=config_adm_edm_mcedm_res32.yaml system=swe_per subname=swe_per dataroot=data datamodule.batch_size=16 trainer.max_epochs=1 diff_sampler.n_samples=1
+```
+
+```bash
+python eval_model.py --config-name=config_adm_edm_mcedm_res32.yaml system=swe_per subname=swe_per dataroot=data ckpt_path=logs/runs/run_name datamodule.batch_size=16 trainer.max_epochs=1 diff_sampler.n_samples=5 
+```
+
+## Baselines
+To run baseline similar commands are used. Here are the examples of training commands. In order to run inference just run `eval_model.py` instead of `run.py` and add ckpt_path argument.
+
+EDM training on a single task
+
+```bash
+python run.py --config-name=config_adm_edm_res32_cond_h.yaml system=swe_per subname=swe_per dataroot=data datamodule.batch_size=16 trainer.max_epochs=1 diff_sampler.n_samples=1
+```
+
+Diffusion model with U-Net from DDPM 
+
+```bash
+python run.py --config-name=config_ddim_res32_cond_h.yaml system=swe_per subname=swe_per dataroot=data datamodule.batch_size=16 trainer.max_epochs=1 diff_sampler.n_samples=1
+```
+
+Diffusion model trained to jointly approximate the states (no conditioning on training)
+
+```bash
+python run.py --config-name=config_ddim_res32.yaml system=swe_per subname=swe_per dataroot=data datamodule.batch_size=16 trainer.max_epochs=1 diff_sampler.n_samples=1
+```
+
+FNO baseline
+
+```bash
+python run.py --config-name=config_fnostatereconstrabs2d.yaml system=swe_per dataroot=data subname=swe_per datamodule.batch_size=8 trainer.max_epochs=1 model.hparams.width=32 model.hparams.inst_norm=False
+```
+
+Oformer
+
+```bash
+python run.py --config-name=config_oformer_t.yaml system=swe_per subname=swe_per dataroot=data datamodule.batch_size=1 model.hparams.lr=0.0006 trainer.max_epochs=1 trainer.gradient_clip_val=1.0 model.hparams.curriculum_steps=0
+```
+
+
+In order to incorporate conditioning information on inference (RePaint) change the sampler parameter 
+`diff_sampler=edm_sampler diff_sampler.n_time_h=0 diff_sampler.n_time_u=64` setting how many time steps are observed for each state variable respectively.
+
+
 ## Data generation
 
 
@@ -68,11 +118,10 @@ and preprocessed by the following command:
 
 ```bash
 python preprocess_darcy.py
-
 ```
 
 
-# Citation
+## Citation
 
 ```
 @inproceedings{haitsiukevich2024diffusion,

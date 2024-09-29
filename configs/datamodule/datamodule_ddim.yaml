@@ -1,0 +1,20 @@
+_target_: datamodules.pl_datamodule.HDF5Datamodule
+name: h5_datamodule
+train_path: data/1D_swp_NA_NA.h5
+val_path: data/1D_swp_NA_NA.h5
+test_path: data/1D_swp_NA_NA.h5
+return_abs_coords: False
+return_grid: False
+norm_x: False
+norm_t: False
+norm_input: False
+norm_target: False
+flip_xy: False
+const_norm_stats: True
+use_theta: False
+use_tar_ic: False
+
+num_workers: 10
+batch_size: 32
+test_batch_size: 0
+down_factor: 1

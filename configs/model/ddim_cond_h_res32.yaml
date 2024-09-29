@@ -1,0 +1,76 @@
+_target_: models.ddim.PlCondDdim
+hparams:
+  name: ddim_cond_h
+  model:
+    type: "simple"
+    in_channels: 1
+    cond_channels: 1
+    cat_cond: False
+    out_ch: 1
+    ch: 64  # 128
+    ch_mult: [ 1, 1, 1]
+    # ch_mult_emb: 4
+    num_res_blocks: 1  # 2
+    attn_resolutions: [ 32 ]
+    dropout: 0.0
+    var_type: fixedsmall
+    ema_rate: 0.999
+    ema: True
+    resamp_with_conv: True
+    resolution: 128
+    self_cond: True
+    cond_p: 1.
+    dx_cond: False
+    cat_dx: False
+    dx_norm: 'l2'
+    dx_detach: False
+    node_type: False
+
+  data:
+    normalization: 'gauss'
+    uniform_dequantization: False
+    gaussian_dequantization: False
+    rescaled: False
+
+  diffusion:
+    beta_schedule: linear
+    beta_start: 0.0001
+    beta_end: 0.02
+    num_diffusion_timesteps: 1000
+
+  optimization:
+    optimizer: "Adam"
+    lr: 0.0002
+    weight_decay: 0.
+    beta1: 0.9
+    amsgrad: false
+    eps: 0.00000001
+    grad_clip: 1.0
+    loss: l2
+    pde_loss_lambda: 0.0
+    pde_loss_prop_t: False  # rescale the pde loss by 1 / t (noise_level)
+    use_gt_pde: False
+    factor: 0.3  # not use in scheduler
+    step_size: 50  # not used in scheduler
+
+  sampler:
+    name: edm
+    type: edm
+    timesteps: 50
+    sigma_min: 0.002
+    sigma_max: 80
+    rho: 7
+    S_churn: 15.0  # includes stochasticity in the model
+    S_min: 0
+    S_max: 'inf'
+    S_noise: 1
+    n_samples: 1
+    n_repeat: 2
+    n_time_h: 128
+    n_time_u: 0
+    return_last: True
+    select_by_pde: False
+    use_gt_pde_select: True
+    guide_dx: False
+    w: 0.0
+    plot_scaled: False

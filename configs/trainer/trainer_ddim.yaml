@@ -1,0 +1,12 @@
+_target_: pytorch_lightning.Trainer
+max_epochs: 500
+accelerator: 'gpu'
+devices: 1
+num_nodes: 1
+precision: 32
+strategy: 'ddp'
+gradient_clip_algorithm: norm
+gradient_clip_val: 1.0
+check_val_every_n_epoch: 1  # 100
+# https://pytorch-lightning.readthedocs.io/en/0.9.0/multi_gpu.html
+# https://lightning.ai/docs/pytorch/stable/accelerators/gpu_intermediate.html
