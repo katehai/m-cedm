@@ -1,0 +1,25 @@
+name: mag
+channels:
+  - nvidia
+  - pytorch
+  - defaults
+  - pyg
+dependencies:
+  - pytorch=1.13.1
+  - pytorch-cuda=11.7
+  - pytorch-cluster
+  - pip
+  - pip:
+      - numpy
+      - scipy
+      - matplotlib
+      - h5py
+      - pytorch_lightning==1.8
+      - wandb
+      - hydra-core
+      - hydra-optuna-sweeper
+      - hydra-colorlog
+      - omegaconf
+      - rich
+      - einops
+      - dgl
