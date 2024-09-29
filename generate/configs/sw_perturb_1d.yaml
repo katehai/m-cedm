@@ -1,0 +1,27 @@
+# @package _global_
+
+# the file is adopted from
+# https://github.com/pdebench/PDEBench/blob/main/pdebench/data_gen/configs/radial_dam_break.yaml
+defaults:
+  - _self_
+
+# save work dir, since hydra overrides it by default
+work_dir: ${hydra:runtime.cwd}
+data_dir: data
+output_path: 1D_swp_128  # 1D_swp_128_u0  # 1D_swp_NA_NA
+name: 1d_perturbed_128
+test: False
+
+sim:
+  T_end: 1.28  # 1.0
+  n_time_steps: 128  # 100
+  xdim: 128
+  gravity: 1.0
+  inner_height: 2.0
+  init_stimulus: 0.1
+  x0: 0.0
+  init_u: 0.0
+  sigma: 0.5
+  x_left: -5
+  x_right: 5
+  seed: '???'
